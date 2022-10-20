@@ -42,41 +42,43 @@ public class Sorting {
         System.out.println(Arrays.toString(arr));
     }
 
-    static void shuffleSort(){
+    static void shuffleSort() {
         Random random = new Random();
         for (int i = 0; i < size; i++)
             swap(i, random.nextInt(size));
     }
-    static boolean isSorted(){
-        for(int i = 1; i < size; i++)
-            if(arr[i]<arr[i-1])
+
+    static boolean isSorted() {
+        for (int i = 1; i < size; i++)
+            if (arr[i] < arr[i - 1])
                 return false;
-            return true;
+        return true;
     }
-    static void bogoSort(){
+
+    static void bogoSort() {
         while (!isSorted())
             shuffleSort();
     }
 
-    static void combSort(){
+    static void combSort() {
         double factor = 1.2473309;
         int step = size - 1;
-        while (step >= 1){
-            for (int i = 0; i + step < size; i++){
-                if (arr[i] > arr[i+step]){
-                    printColor(i, i+step);
-                    swap(i, i+step);
+        while (step >= 1) {
+            for (int i = 0; i + step < size; i++) {
+                if (arr[i] > arr[i + step]) {
+                    printColor(i, i + step);
+                    swap(i, i + step);
                 }
             }
             step /= factor;
         }
     }
 
-    static void selectionSort(){
-        for (int i = 0; i < size; i++){
+    static void selectionSort() {
+        for (int i = 0; i < size; i++) {
             int min = arr[i], index = 0;
             for (int j = i; j < size; j++)
-                if (min > arr[j]){
+                if (min > arr[j]) {
                     min = arr[j];
                     index = j;
                 }
@@ -87,18 +89,18 @@ public class Sorting {
         }
     }
 
-    static void insertionSort(){
-        for (int i = 0; i < size; i++){
+    static void insertionSort() {
+        for (int i = 0; i < size; i++) {
             int spec = arr[i], j;
             for (j = i; j > 0 && spec < arr[j - 1]; j--)
-                arr[j] = arr[j-1];
+                arr[j] = arr[j - 1];
             arr[j] = spec;
         }
     }
 
-    static void gnomeSort(){
+    static void gnomeSort() {
         for (int i = 0; i < size; i++)
-            for (int j = i; j > 0 && arr[j] < arr[j-1]; j--){
+            for (int j = i; j > 0 && arr[j] < arr[j - 1]; j--) {
                 printColor(j, j - 1);
                 swap(j, j - 1);
             }
@@ -106,7 +108,7 @@ public class Sorting {
 
     static void oddEvenSort() {
         for (int i = 0; i < size - 1; i++)
-            for (int j = i % 2 == 0 ? 0 : 1; j < size - 2; j+=2)
+            for (int j = i % 2 == 0 ? 0 : 1; j < size - 2; j += 2)
                 if (arr[j] > arr[j + 2]) {
                     printColor(j, j + 2);
                     swap(j, j + 2);
